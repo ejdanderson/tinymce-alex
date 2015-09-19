@@ -1,0 +1,9 @@
+.mce-alex-insensitive,
+.mce-alex-sensitive {
+	padding: 1px 3px;
+	background-color: #AAFFAA;
+}
+
+.mce-alex-insensitive {
+	background-color: #FFAAAA;
+}

@@ -9,6 +9,9 @@
 			var self = this;
 			self.editor = editor;
 
+			// Load CSS
+			tinymce.DOM.loadCSS(url + '/tinymce-alex.css');
+
 			// TODO
 			// On content load, run alex
 
@@ -34,10 +37,23 @@
 		formatMessages : function(messages) {
 			var html = '';
 			for (var i = 0; i <= messages.length - 1; i++) {
-				 html += messages[i].message + '<br />';
+				 html += this.addMessageClass(messages[i]) + '<br />';
 			};
 
 			return html;
+		},
+
+		addMessageClass : function(message) {
+			var splitIndex = message.message.indexOf('insensitive'); // insensitive shouldn't be matched
+
+			return message.message.replace(/`(.+?)`/g, function (match, capture, offset) {
+				var messageClass = 'mce-alex-sensitive';
+				if ( offset < splitIndex ) {
+					messageClass = 'mce-alex-insensitive';
+				}
+
+				return '<code class="' + messageClass + '">' + capture + '</code>';
+			});
 		}
 	});
 
