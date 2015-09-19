@@ -1,16 +1,20 @@
 //TODO Don't rely on jQuery
 (function($) {
+	// Load Alex Dependency
+	tinymce.ScriptLoader.load( tinymce.PluginManager.urls.alextinymce + '/alex/alex.js');
+
+	// Create tinyMCE Class
 	tinymce.create('tinymce.plugins.alextinymce', {
 		init : function(editor, url) {
 			var self = this;
 			self.editor = editor;
 
 			// TODO
-			// On content load run alex
+			// On content load, run alex
 
 			editor.on('init', function(e){
-				// parentElement.parentElement.parentElement is WP Specific, need to insert after wordcount etc...
-				self.$alexWrapper = $('<div class="alex-tinymce-wrapper"></div>').insertAfter(editor.container);
+				var $wrapper = $('<div id="alex-tinymce-wrapper"><div id="alex-tinymce-handle"> > AlexJS</div></div>').insertAfter(editor.container);
+				self.$messageWrapper = $('<div id="alex-tinymce-innerwrapper"></div>').appendTo($wrapper);
 			});
 
 			// On node change, run alex
@@ -23,7 +27,8 @@
 			var content = this.editor.getContent();
 			var rawText = $(content).text();
 			var html = this.formatMessages(alex(rawText).messages);
-			this.$alexWrapper.html(html);
+			console.log(alex(rawText).messages);
+			this.$messageWrapper.html(html);
 		},
 
 		formatMessages : function(messages) {

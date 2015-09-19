@@ -1,0 +1,3 @@
+[submodule "alex"]
+	path = alex
+	url = git@github.com:wooorm/alex.git
