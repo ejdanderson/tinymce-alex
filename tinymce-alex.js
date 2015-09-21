@@ -1,3 +1,12 @@
+/*
+Plugin URI: http://github.com/kidfiction/tinymce-alex
+Description: Integrates  into plugin for (Alex)[http://alex.com].
+Version: 0.1
+Author: Evan Anderson
+Author URI: http://ejdanderson.com
+License: GPLv2 or later
+*/
+
 // Load Alex Dependency
 tinymce.ScriptLoader.load(tinymce.PluginManager.urls.alextinymce + '/alex/alex.js');
 
@@ -14,12 +23,12 @@ tinymce.create('tinymce.plugins.alextinymce', {
 		tinymce.DOM.loadCSS(url + '/tinymce-alex.css');
 
 		editor.on('init', function(e){
-			var $wrapper;
+
 			self.$(editor.container).after('<div id="mce-alex-wrapper"><div id="mce-alex-handle"> <span class="mce-alex-toggle">-</span> AlexJS : <span id="mce-alex-count">0</div></div>');
-			$wrapper = self.$('#mce-alex-wrapper');
+			self.$wrapper = self.$('#mce-alex-wrapper');
 
 			self.$countWrapper = self.$('#mce-alex-count');
-			self.$messageWrapper = self.$('<ul id="mce-alex-ul"></ul>').appendTo($wrapper);
+			self.$messageWrapper = self.$('<ul id="mce-alex-ul"></ul>').appendTo(self.$wrapper);
 			self.rootNode = self.editor.dom.getRoot();
 			self.$('#mce-alex-handle').on('click', function(e) {
 
@@ -31,21 +40,24 @@ tinymce.create('tinymce.plugins.alextinymce', {
 					self.$messageWrapper.addClass('mce-alex-hide');
 					self.$('.mce-alex-toggle').html('+');
 				}
-
 			});
-		});
 
-		// On init, run alex (runs once)
-		editor.on('init', function(e) {
 			self.runAlex();
+
+			// WP Specific events, hide Alex wrapper when
+			// using text view
+			self.$('.switch-html').on('click', function(e) {
+				self.hideWrapper();
+			});
+			self.$('.switch-tmce').on('click', function(e) {
+				self.showsWrapper();
+			});
 		});
 
 		// On node change, run alex. TODO run this on keyup event with debounce implementation
 		editor.on('change', function(e) {
 			self.runAlex();
 		});
-
-
 	},
 
 	runAlex : function(e) {
@@ -89,6 +101,10 @@ tinymce.create('tinymce.plugins.alextinymce', {
 	},
 	*/
 
+	toggleAlex : function() {
+		this.$wrapper.toggleClass('mce-alex-hide');
+	},
+
 	formatMessages : function(messages) {
 		var html = '';
 		for (var i = 0; i <= messages.length - 1; i++) {
@@ -109,6 +125,14 @@ tinymce.create('tinymce.plugins.alextinymce', {
 
 			return '<code class="' + messageClass + '">' + capture + '</code>';
 		});
+	},
+
+	showWrapper : function() {
+		this.$wrapper.show();
+	},
+
+	hideWrapper : function() {
+		this.$wrapper.hide();
 	}
 });
 
