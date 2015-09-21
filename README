@@ -1,6 +1,6 @@
 # TinyMCE Alex
 
-TinyMCE Alex is a (TinyMCE)[http://www.tinymce.com/] plugin for (Alex)[http://alex.com].
+TinyMCE Alex is a [TinyMCE](http://www.tinymce.com/) plugin for [Alex](http://alex.com).
 
 This plugin was built using the WordPress TinyMCE implementation. There are no guarentees it will work outside the WP ecosystem.
 
