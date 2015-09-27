@@ -14,6 +14,8 @@ tinymce.create('tinymce.plugins.alextinymce', {
 		tinymce.DOM.loadCSS(url + '/tinymce-alex.css');
 
 		editor.on('init', function(e){
+
+			// Element setup
 			var $wrapper;
 			self.$(editor.container).after('<div id="mce-alex-wrapper"><div id="mce-alex-handle"> <span class="mce-alex-toggle">-</span> AlexJS : <span id="mce-alex-count">0</div></div>');
 			$wrapper = self.$('#mce-alex-wrapper');
@@ -33,10 +35,8 @@ tinymce.create('tinymce.plugins.alextinymce', {
 				}
 
 			});
-		});
 
-		// On init, run alex (runs once)
-		editor.on('init', function(e) {
+			// On init, run alex (runs once)
 			self.runAlex();
 		});
 
