@@ -24,7 +24,7 @@ tinymce.create('tinymce.plugins.alextinymce', {
 
 		editor.on('init', function(e){
 
-			self.$(editor.container).after('<div id="mce-alex-wrapper"><div id="mce-alex-handle"> <span class="mce-alex-toggle">-</span> AlexJS : <span id="mce-alex-count">0</div></div>');
+			self.$(editor.container).after('<div id="mce-alex-wrapper"><div id="mce-alex-handle"> <span class="mce-alex-toggle">-</span> Alex : <span id="mce-alex-count">0</div></div>');
 			self.$wrapper = self.$('#mce-alex-wrapper');
 
 			self.$countWrapper = self.$('#mce-alex-count');
